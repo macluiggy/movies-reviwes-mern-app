@@ -15,25 +15,32 @@ export default class MoviesDAO {
 	}
 
 	static async getMovies({
-		filters = null,
-		page = 0,
-		moviesPerPage = 20,
+		filters = null,// al inicio no hay filtro
+		page = 0,//la pagina inicial es 0
+		moviesPerPage = 20,//la cantidad de peliculas que se van a mostrar por pagina es 20
 	} = {}) {
-		let query
-		if (filters) {
-			if ('title' in filters) {
-				query = { $text: { $search: filters['title'] }}
-			} else if ("rated" in filters) {
-				query = { "rated": { $eq: filters['rated'] } }
+		let query //definimos el query
+		if (filters) {//si se establece un filtro
+			if ('title' in filters) {//si el filtro es "title"
+				query = { $text: { $search: filters['title'] }}//establece el query para ese termino
+			} else if ("rated" in filters) {//si el filtro es 'rated'
+				query = { "rated": { $eq: filters['rated'] } }//establece a query para ese termino
 			}
 		}
 
-		let cursor
-		try {
-			cursor = await movies
-						.find(query)
-						.limit(moviesPerPage)
-						.skip(moviesPerPage * page)
+		query = { "rated": filters['rated']}; //definimos uno de ejemplo
+
+		let cursor //definimos el cursor
+		try {//intentamos
+			cursor = await movies//se espera que objener la colection antes creada en injectDB
+						.find(query)//encuntra la/las peliculas que coincidan el el query
+						.limit(moviesPerPage)//limita el resultado
+						.skip(moviesPerPage * page)//omite el numero de peliculas que se encuentra
+												   //en el argumento y dado que ya se limito solo se
+												   //mostraran moviesPerPage peliculas
+												   //si se usa este con limit, este se aplicara primero
+												   //el limite se aplicara solo a los documentos que
+												   //aparecen despues de la omision
 			const moviesList = await cursor.toArray()
 			const totalNumMovies = await movies.countDocuments(query)
 			return { moviesList, totalNumMovies }
