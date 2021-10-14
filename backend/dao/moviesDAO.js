@@ -28,7 +28,7 @@ export default class MoviesDAO {
 			}
 		}
 
-		query = { "rated": filters['rated']}; //definimos uno de ejemplo
+		//query = { "rated": filters['rated']}; //definimos uno de ejemplo
 
 		let cursor //definimos el cursor
 		try {//intentamos
@@ -45,7 +45,8 @@ export default class MoviesDAO {
 												     //al cursor
 			const totalNumMovies = await movies.countDocuments(query)//obten el numero total de peliculas
 																	 //contando el numero de documentos
-																	 //en el query
+																	 //en el query que satisfaga la 
+																	 //condicion
 			return { moviesList, totalNumMovies }//retorna la lista de peliculas y el numero total de
 												 //peliculas encontradas
 		}
