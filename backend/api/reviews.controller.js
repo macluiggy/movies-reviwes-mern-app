@@ -20,7 +20,9 @@ export default class ReviewsController {
 				date
 			)
 			//si todo salio bien, se devuleve el mensaje de exito
-			res.json({ status: "success" })
+			res.json({
+				status: "success",
+			})
 		} catch(e) {//si hubo un error, sen envia el mensaje de error
 			res.status(500).json({ error: e.message })
 		}
@@ -51,7 +53,7 @@ export default class ReviewsController {
 			}
 			if (ReviewResponse.modifiedCount === 0) {//verificamos que haya sido actualizada la reseña
 				//si no, se manda el error
-				throw new Error("Unable to update review. User may not be original poster")
+				throw new Error("Unable to update review. User may not be original poster"+ReviewResponse.modifiedCount)
 			}
 			res.json({ status: "success" })//si todo sale bien, se muestra el mensaje de exito
 		} catch(e) {//de otra forma el mensaje de error
@@ -73,6 +75,22 @@ export default class ReviewsController {
 			//muestra el mensaje de exito si salio todo bien
 			res.json({ status: "success" })
 		} catch(e) {
+			res.status(500).json({ error: e.message })
+		}
+	}
+
+	static async apiGetReview (req, res, next) {
+		try {
+			const reviewId = req.body.review_id
+			const userId = req.body.user_id
+
+			const ReviewResponse = await ReviewsDAO.getReview(
+				reviewId,
+				userId,
+			)
+			console.log(ReviewResponse)
+			res.json({ status: 'success', received: ReviewResponse })
+		} catch (e) {
 			res.status(500).json({ error: e.message })
 		}
 	}

@@ -29,12 +29,15 @@ export default class ReviewsDAO {
 				user_id: user._id,
 				date: date,
 				review: review,
-				movie_id: ObjectId(movieId)
+				movie_id: ObjectId(movieId)//lo probe sin usar el metodo ObjectId, e igual funciona
 			}
 			//una vez creada la coneccion con la base de datos en injectDB, se usa la coneccion
 			//reviews y de esta el metodo insertOne para añadir el documento previamente creado
 			//a la base de datos
-			return await reviews.insertOne(reviewDoc)
+			let postResponse = await reviews.insertOne(reviewDoc)
+			//let getResponse = await reviews.findOne(reviewDoc)
+			//postResponse['Data sent'] = getResponse;
+			return postResponse
 		}
 		catch(e) {
 			console.error(`unable to post review: ${e}`)
@@ -57,6 +60,44 @@ export default class ReviewsDAO {
 		}
 		catch(e) {
 			console.error(`unable to update review: ${e}`)
+			return { error: e }
+		}
+	}
+
+	static async deleteReview (reviewId, userId) {
+		try {
+			//creamos la respuesta la cual va a borrar la reseña, volmevos a usar ObjectId, ya que
+			//el id que le pasamos al metodo deleteOne tiene que ser un id de objeto de mongoDB y el 
+			//metod ObjectId es quien lo va a convertir
+			const deleteResponse = await reviews.deleteOne({
+				_id: ObjectId(reviewId),
+				user_id: userId,
+			})
+			return deleteResponse
+		}
+		catch(e) {
+			console.error(`unable to delete review: ${e}`)
+			return { error: e }
+		}
+	}
+
+	static async getReview (reviewId, userId) {
+		try {
+			const doc = {
+				_id: reviewId,
+				user_id: userId
+			}
+			let getResponse = {}
+			await reviews.findOne({}, (err, result) => {
+				if (!err) {
+					console.log(result)
+					getResponse['result'] = result
+					return getResponse
+				}
+			})
+			
+		} catch(e) {
+			console.error(`unable to get review: ${e}`)
 			return { error: e }
 		}
 	}
