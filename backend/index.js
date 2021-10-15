@@ -2,6 +2,7 @@ import app from './server.js'
 import mongodb from 'mongodb'
 import dotenv from 'dotenv'
 import MoviesDAO from './dao/moviesDAO.js'
+import ReviewsDAO from './dao/reviewsDAO.js'
 
 async function main() {
 
@@ -19,6 +20,8 @@ async function main() {
 		//justo despues de conectar la base de datos llamamos a injectDB para obtener nuestra
 		//referancia inicial a la movies collection
 		await MoviesDAO.injectDB(client)
+		//mandamos el cliente de mongo a reviewsDAO para poder usar la base de datos
+		await ReviewsDAO.injectDB(client)
 		app.listen(port, () => {
 			console.log('sever is running on port:'+port);
 		})
