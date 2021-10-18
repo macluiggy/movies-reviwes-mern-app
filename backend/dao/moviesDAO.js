@@ -1,3 +1,6 @@
+import mongodb from 'mongodb';
+const ObjectId = mongodb.ObjectId
+
 let movies
 
 export default class MoviesDAO {
@@ -60,11 +63,38 @@ export default class MoviesDAO {
 	static async getRatings() {
 		let ratings = []
 		try {
+			//obten todos los valores de la propiedad 'rated' de la coleccion movies y asignalos al array
+			//ratings
 			ratings = await movies.distinct("rated");
 			return ratings
 		}
 		catch(e) {
+			console.log(`unable to get ratings, ${e}`)
+			return ratings
+		}
+	}
 
+	static async getMovieById(id) {
+		try {
+			return await movies.aggregate([
+				{
+					$match: {
+						_id: new ObjectId(id),
+					}
+				},
+				{ $lookup: //aqui va a buscar las peliculas de movies de las cuales tengan un review con el id = _id el cual proviene de la coleccion 'reviews'
+					{
+						from: 'reviews',//de la coleccion 'reviews'
+						localField: '_id',//de valor del _id que se encontro en $match
+						foreignField: 'movie_id',//busca las peliculas que encajen con el _id de localFiel, y devuelve las peliculas con sus respectivos reviews
+						as: 'reviews',//devuelvelos como un array
+					}
+				}
+			]).next()//ve hacia el siguiente documento de la coleccion que matchee
+		}
+		catch(e) {
+			console.error(`something went wrong in getMovieById: ${e}`)
+			throw e
 		}
 	}
 }
