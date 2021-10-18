@@ -34,7 +34,9 @@ export default class ReviewsDAO {
 			//una vez creada la coneccion con la base de datos en injectDB, se usa la coneccion
 			//reviews y de esta el metodo insertOne para añadir el documento previamente creado
 			//a la base de datos
-			let postResponse = await reviews.insertOne(reviewDoc)
+			let postResponse = await reviews.insertOne(reviewDoc, (err, data) => {
+				console.log(data)
+			})
 			//let getResponse = await reviews.findOne(reviewDoc)
 			//postResponse['Data sent'] = getResponse;
 			return postResponse
@@ -53,7 +55,7 @@ export default class ReviewsDAO {
 			//se actualizara la review y la fecha de la misma
 			const updateResponse = await reviews.updateOne(
 				{ user_id: userId, ObjectId: ObjectId(reviewId)},
-				{ $set: { review: review, date: date }}
+				{ $set: { review: review, date: date }},
 			)
 			//se retorna la respuesta
 			return updateResponse
@@ -73,6 +75,7 @@ export default class ReviewsDAO {
 				_id: ObjectId(reviewId),
 				user_id: userId,
 			})
+			console.log(deleteResponse)
 			return deleteResponse
 		}
 		catch(e) {

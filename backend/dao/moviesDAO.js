@@ -41,6 +41,7 @@ export default class MoviesDAO {
 												   //si se usa este con limit, este se aplicara primero
 												   //el limite se aplicara solo a los documentos que
 												   //aparecen despues de la omision
+            //console.log(cursor)
 			const moviesList = await cursor.toArray()//crea un array con el filtro que se le aplico
 												     //al cursor
 			const totalNumMovies = await movies.countDocuments(query)//obten el numero total de peliculas
@@ -53,6 +54,17 @@ export default class MoviesDAO {
 		catch(e) {
 			console.error(`Unable to issue find command, ${e}`)
 			return { moviesList: [], totalNumMovies: 0 }
+		}
+	}
+
+	static async getRatings() {
+		let ratings = []
+		try {
+			ratings = await movies.distinct("rated");
+			return ratings
+		}
+		catch(e) {
+
 		}
 	}
 }

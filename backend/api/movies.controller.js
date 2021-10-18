@@ -30,4 +30,40 @@ export default class MoviesController {
 		//lo respondemos con un json
 		res.json(response)
 	}
+
+	static async apiGetMovieById(req, res, next) {
+		try {
+			//obtenemos el id que se extrae del valor puesto entre los slashes /:id/
+			let id = req.params.id || {}
+			//llamamos al metodo correspondiente el cual devolvera la pelicula segun el id
+			let movie = await MoviesDAO.getMovieById(id)
+			if (!movie) {//si la pelicula no existe
+				//muestra el mensaje de error
+				res.status(400).json({ error: 'not found' })
+				return //en este caso es necesario ponder el return, ya que si no se encuentra la
+				//pelicula, se va a correr este codigo y el que le sigue, por eso se utiliza el return
+				//para decirle que hasta aqui llege el codigo de la funcion
+			}
+			//muestra la pelicula
+			res.json(movie)
+		}
+		catch(e) {
+			console.log(`api, ${e}`)
+			res.status(500).json({ error: e })
+		}
+	}
+
+	static async apiGetRatings(req, res, next) {
+		//en este caso es mas directo, solo se llama directamente al metodo
+		try {
+			//y este guarda el resultado
+			let propertyTypes = await MoviesDAO.getRatings()
+			//para luego mostrarlo al usuario
+			res.json(propertyTypes)
+		}
+		catch(e) {
+			console.log(`api, ${e}`)
+			res.status(500).json({ error: e })
+		}
+	}
 }
