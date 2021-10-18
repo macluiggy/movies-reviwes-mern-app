@@ -1,4 +1,6 @@
-import ReviewsDAO from '../dao/reviewsDAO.js'//importamos la clase donde llamaremos a la base de datos
+import ReviewsDAO, { reviews } from '../dao/reviewsDAO.js'//importamos la clase donde llamaremos a la base de datos
+import mongodb from 'mongodb'
+const ObjectId = mongodb.ObjectId
 
 export default class ReviewsController {
 	static async apiPostReview (req, res, next) {//el handler para el post request
@@ -81,17 +83,21 @@ export default class ReviewsController {
 
 	static async apiGetReview (req, res, next) {
 		try {
+			//console.log(reviews)
 			const reviewId = req.body.review_id
 			const userId = req.body.user_id
-
-			const ReviewResponse = await ReviewsDAO.getReview(
-				reviewId,
-				userId,
-			)
-			console.log(ReviewResponse)
-			res.json({ status: 'success', received: ReviewResponse })
+			let r = {}
+			await reviews.findOne({ _id: ObjectId(reviewId) }, (err, result) => {
+				if (!err) {
+					console.log(result)
+					res.json({ status: 'success', received: result })
+				}
+			})
+			//console.log(r)
+			//console.log(ReviewResponse)
+			
 		} catch (e) {
-			res.status(500).json({ error: e.message })
+			res.status(500).json({ error: e.message + 'jajajja'})
 		}
 	}
 }

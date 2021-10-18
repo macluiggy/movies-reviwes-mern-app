@@ -4,7 +4,7 @@ import mongodb from 'mongodb'
 const ObjectId = mongodb.ObjectId
 
 //definimos las revies
-let reviews
+export let reviews
 
 export default class ReviewsDAO {
 	static async injectDB(conn) {
@@ -81,21 +81,18 @@ export default class ReviewsDAO {
 		}
 	}
 
-	static async getReview (reviewId, userId) {
+	static async getReview (reviewId, userId, response) {//esto solo es para probar y aprender
+		//ya que para get es mejor usar un url especifico y que el resultado de la peticion se muestre
+		//en pantalla al usuario
 		try {
-			const doc = {
-				_id: reviewId,
-				user_id: userId
-			}
-			let getResponse = {}
-			await reviews.findOne({}, (err, result) => {
+			let r;
+			await reviews.findOne({ _id: ObjectId(reviewId)}, (err, result) => {
 				if (!err) {
-					console.log(result)
-					getResponse['result'] = result
-					return getResponse
+					//console.log(result)
+					r = result
 				}
 			})
-			
+			console.log(r, 'hola')
 		} catch(e) {
 			console.error(`unable to get review: ${e}`)
 			return { error: e }
