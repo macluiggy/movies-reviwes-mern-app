@@ -3,12 +3,18 @@
     "selected": 1
   },
   "1 error pnpm": {
-    "code": "ERR_PNPM_NO_IMPORTER_MANIFEST_FOUND",
+    "shortMessage": "Command failed with exit code 1: /tmp/dlx-4915/bin/create-react-app frontend",
+    "command": "/tmp/dlx-4915/bin/create-react-app frontend",
+    "escapedCommand": "\"/tmp/dlx-4915/bin/create-react-app\" frontend",
+    "exitCode": 1,
+    "failed": true,
+    "timedOut": false,
+    "isCanceled": false,
+    "killed": false,
     "err": {
       "name": "pnpm",
-      "message": "No package.json (or package.yaml, or package.json5) was found in \"/home/macluiggy/Documents/PROGRAMMING/MERN/movie-reviews-mern-app\".",
-      "code": "ERR_PNPM_NO_IMPORTER_MANIFEST_FOUND",
-      "stack": "pnpm: No package.json (or package.yaml, or package.json5) was found in \"/home/macluiggy/Documents/PROGRAMMING/MERN/movie-reviews-mern-app\".\n    at readProjectManifest (/home/macluiggy/.nvm/versions/node/v14.17.5/pnpm-global/5/node_modules/.pnpm/pnpm@6.17.0/node_modules/pnpm/dist/pnpm.cjs:40621:13)\n    at async Object.readProjectManifestOnly (/home/macluiggy/.nvm/versions/node/v14.17.5/pnpm-global/5/node_modules/.pnpm/pnpm@6.17.0/node_modules/pnpm/dist/pnpm.cjs:40625:28)\n    at async Object.readProjectManifestOnly (/home/macluiggy/.nvm/versions/node/v14.17.5/pnpm-global/5/node_modules/.pnpm/pnpm@6.17.0/node_modules/pnpm/dist/pnpm.cjs:40844:24)\n    at async Object.handler (/home/macluiggy/.nvm/versions/node/v14.17.5/pnpm-global/5/node_modules/.pnpm/pnpm@6.17.0/node_modules/pnpm/dist/pnpm.cjs:129693:24)\n    at async /home/macluiggy/.nvm/versions/node/v14.17.5/pnpm-global/5/node_modules/.pnpm/pnpm@6.17.0/node_modules/pnpm/dist/pnpm.cjs:133878:20\n    at async run (/home/macluiggy/.nvm/versions/node/v14.17.5/pnpm-global/5/node_modules/.pnpm/pnpm@6.17.0/node_modules/pnpm/dist/pnpm.cjs:133853:34)\n    at async runPnpm (/home/macluiggy/.nvm/versions/node/v14.17.5/pnpm-global/5/node_modules/.pnpm/pnpm@6.17.0/node_modules/pnpm/dist/pnpm.cjs:134063:5)\n    at async /home/macluiggy/.nvm/versions/node/v14.17.5/pnpm-global/5/node_modules/.pnpm/pnpm@6.17.0/node_modules/pnpm/dist/pnpm.cjs:134055:7"
+      "message": "Command failed with exit code 1: /tmp/dlx-4915/bin/create-react-app frontend",
+      "stack": "pnpm: Command failed with exit code 1: /tmp/dlx-4915/bin/create-react-app frontend\n    at makeError (/home/macluiggy/.nvm/versions/node/v14.17.5/pnpm-global/5/node_modules/.pnpm/pnpm@6.17.2/node_modules/pnpm/dist/pnpm.cjs:48965:17)\n    at handlePromise (/home/macluiggy/.nvm/versions/node/v14.17.5/pnpm-global/5/node_modules/.pnpm/pnpm@6.17.2/node_modules/pnpm/dist/pnpm.cjs:49536:33)\n    at processTicksAndRejections (internal/process/task_queues.js:95:5)\n    at async Object.handler [as dlx] (/home/macluiggy/.nvm/versions/node/v14.17.5/pnpm-global/5/node_modules/.pnpm/pnpm@6.17.2/node_modules/pnpm/dist/pnpm.cjs:129368:7)\n    at async /home/macluiggy/.nvm/versions/node/v14.17.5/pnpm-global/5/node_modules/.pnpm/pnpm@6.17.2/node_modules/pnpm/dist/pnpm.cjs:133951:20\n    at async run (/home/macluiggy/.nvm/versions/node/v14.17.5/pnpm-global/5/node_modules/.pnpm/pnpm@6.17.2/node_modules/pnpm/dist/pnpm.cjs:133926:34)\n    at async runPnpm (/home/macluiggy/.nvm/versions/node/v14.17.5/pnpm-global/5/node_modules/.pnpm/pnpm@6.17.2/node_modules/pnpm/dist/pnpm.cjs:134137:5)\n    at async /home/macluiggy/.nvm/versions/node/v14.17.5/pnpm-global/5/node_modules/.pnpm/pnpm@6.17.2/node_modules/pnpm/dist/pnpm.cjs:134129:7"
     }
   }
 }
