@@ -43,7 +43,7 @@ const MovieList = props => {
 		MovieDataService.getRatings()
 			.then(response => {
 				console.log(response.data)
-				setRatings(['All Ratings']).concat(response.data)
+				setRatings(["All Ratings"].concat(response.data))
 			})
 			.catch(e => {
 				console.log(e)
@@ -62,7 +62,25 @@ const MovieList = props => {
 
 	const find = (query, by) => {
 		MovieDataService.find(query, by)
-			.then(response =>)
+			.then(response => {
+				console.log(response.data)
+				setMovies(response.data.movies)
+			})
+			.catch(e => {
+				console.log(e)
+			})
+	}
+
+	const findByTitle = () => {
+		find(searchTitle, 'title')
+	}
+
+	const findByRating = () => {
+		if (searchRating === 'All Ratings') {
+			retrieveMovies()
+		} else {
+			find(searchRating, 'rated')
+		}
 	}
 
 	return (
