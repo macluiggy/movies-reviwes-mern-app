@@ -25,6 +25,7 @@ const MovieList = props => {
 
 	const [currentPage, setCurrentPage] = useState(0)
 	const [entriesPerPage, setEntriesPerPage] = useState(0)
+	const [currentSearchMode, setCurrentSearchMode] = useState('')
 
 	useEffect(() => {
 		retrieveMovies()
@@ -32,11 +33,27 @@ const MovieList = props => {
 	}, [])
 
 	useEffect(() => {
-		console.log(currentPage)
-		retrieveMovies()
+		//console.log(currentPage)
+		//retrieveMovies()
+		retrieveNextPage()
 	}, [currentPage])
 
+	useEffect(() => {
+		setCurrentPage(0)
+	}, [currentSearchMode])
+	console.log('se buggeoooooooooooooooooooo sexooooooooooooooo')
+	const retrieveNextPage = () => {
+		if (currentSearchMode === 'findByTitle') {
+			findByTitle()
+		} else if (currentSearchMode === 'findByRating') {
+			findByRating()
+		} else {
+			retrieveMovies()
+		}
+	}
+
 	const retrieveMovies = () => {
+		setCurrentSearchMode('')
 		MovieDataService.getAll(currentPage)
 			.then(response => {
 				console.log(response)
@@ -71,7 +88,7 @@ const MovieList = props => {
 	}
 
 	const find = (query, by) => {
-		MovieDataService.find(query, by)
+		MovieDataService.find(query, by, currentPage)
 			.then(response => {
 				console.log(response.data)
 				setMovies(response.data.movies)
@@ -82,10 +99,12 @@ const MovieList = props => {
 	}
 
 	const findByTitle = () => {
+		setCurrentSearchMode('findByTitle')
 		find(searchTitle, 'title')
 	}
 
 	const findByRating = () => {
+		setCurrentSearchMode('findByRating')
 		if (searchRating === 'All Ratings') {
 			retrieveMovies()
 		} else {
