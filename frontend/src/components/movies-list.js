@@ -48,7 +48,7 @@ const MovieList = props => {
 				console.log(e)
 			})
 	}
-
+	//
 	const retrieveRatings = () => {
 		MovieDataService.getRatings()
 			.then(response => {
