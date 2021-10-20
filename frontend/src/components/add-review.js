@@ -5,19 +5,26 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
 const AddReview = props => {
-	let editing = false
-	let initialReviewState = ''
-
+	let editing = false//si esta en falso quiere decir que estamos añadiendo
+	let initialReviewState = ''//el estado inicial de la review
+							   //cuando editamos la review, se va a actualizar
+							   console.log(props, 'holaaaa')
+ 	if (props.location.state && props.location.state.currentReview) {
+ 		editing = true;
+ 		initialReviewState = props.location.state.currentReview.review
+ 	}
 	const [review, setReview] = useState(initialReviewState)
-	//
+	//este se guarda cuando se envia la review para establecer que ya se envió
 	const [submitted, setSubmitted] = useState(false)
 
+	//se actauliza la review cuando tipeamos
 	const onChangeReview = e => {
 		const review = e.target.value
 		setReview(review)
 	}
-	//console.log(props.match)
+	//console.log(props.match, 'heeeeeeeeeelooo')
 	const saveReview = () => {
+		if (!review) { return alert('Please enter a review') }
 		var data = {
 			review: review,
 			name: props.user.name,
@@ -32,7 +39,31 @@ const AddReview = props => {
 			.catch(e => {
 				console.log(e)
 			})
+
+			if (editing) {
+				//obten el id de la review ya existente
+				data.review_id = props.location.state.currentReview._id
+				MovieDataService.updateReview(data)
+					.then(response => {
+						setSubmitted(true)
+						console.log(response.data)
+					})
+					.catch(e => {
+						console.log(e)
+					})
+			}
+			else {
+				MovieDataService.createReview(data)
+					.then(response => {
+						setSubmitted(true)
+						console.log(response.data)
+					})
+					.catch(e => {
+						console.log(e)
+					})
+			}
 	}
+	
 
 	return (
 		<div>

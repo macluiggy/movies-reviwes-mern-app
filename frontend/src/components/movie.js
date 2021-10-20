@@ -24,7 +24,7 @@ const Movie = props => {
 		MovieDataService.get(id)
 			.then(response => {
 				setMovie(response.data)
-				console.log(response.data)
+				//console.log(response.data)
 			})
 			.catch(e => {
 				console.log(e)
@@ -58,6 +58,7 @@ const Movie = props => {
 						<br></br>
 						<h2>Reviews</h2>
 						{movie.reviews.map((review, index) => {
+							//console.log(review)
 							return (
 								<Media key={index}>
 									<Media.Body>
