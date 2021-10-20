@@ -52,7 +52,7 @@ export default class ReviewsDAO {
 			//la respuesta para actualizar la reseña, primero se mandan las propiedades
 			//con las que se van a filtrar la busqueda de las reviews, lo segundo es para 
 			//establecer que propiedades se van a reemplazar de la review filtrada, en este caso
-			//se actualizara la review y la fecha de la misma
+			//se actualizara la review y la fecha de la misma.
 			const updateResponse = await reviews.updateOne(
 				{ user_id: userId, ObjectId: ObjectId(reviewId)},
 				{ $set: { review: review, date: date }},
