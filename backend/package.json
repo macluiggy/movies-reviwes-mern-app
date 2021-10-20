@@ -12,12 +12,15 @@
     "mime-types": "^2.1.33"
   },
   "devDependencies": {},
+  "license": "MIT",
+  "engines": {
+    "node": "14.17.5"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
     "dev": "nodemon index.js"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "author": "Luiggy",
 }
