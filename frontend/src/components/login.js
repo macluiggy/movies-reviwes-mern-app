@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button'
 const Login = props => {
 	const[name, setName] = useState('');
 	const [id, setId] = useState('')
-	console.log(props.history.push)
+	//console.log(props.history.push)
 	const onChangeName = e => {
 		const name = e.target.value//actualiza el nombre
 		setName(name)

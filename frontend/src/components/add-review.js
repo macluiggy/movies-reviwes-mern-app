@@ -32,36 +32,28 @@ const AddReview = props => {
 			movie_id: props.match.params.id,
 		}
 
-		MovieDataService.createReview(data)
-			.then(response => {
-				setSubmitted(true)
-			})
-			.catch(e => {
-				console.log(e)
-			})
-
-			if (editing) {
-				//obten el id de la review ya existente
-				data.review_id = props.location.state.currentReview._id
-				MovieDataService.updateReview(data)
-					.then(response => {
-						setSubmitted(true)
-						console.log(response.data)
-					})
-					.catch(e => {
-						console.log(e)
-					})
-			}
-			else {
-				MovieDataService.createReview(data)
-					.then(response => {
-						setSubmitted(true)
-						console.log(response.data)
-					})
-					.catch(e => {
-						console.log(e)
-					})
-			}
+		if (editing) {
+			//obten el id de la review ya existente
+			data.review_id = props.location.state.currentReview._id
+			MovieDataService.updateReview(data)
+				.then(response => {
+					setSubmitted(true)
+					console.log(response.data)
+				})
+				.catch(e => {
+					console.log(e)
+				})
+		}
+		else {
+			MovieDataService.createReview(data)
+				.then(response => {
+					setSubmitted(true)
+					console.log(response.data)
+				})
+				.catch(e => {
+					console.log(e)
+				})
+		}
 	}
 	
 
