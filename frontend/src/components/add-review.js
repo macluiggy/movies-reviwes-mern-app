@@ -8,7 +8,7 @@ const AddReview = props => {
 	let editing = false//si esta en falso quiere decir que estamos añadiendo
 	let initialReviewState = ''//el estado inicial de la review
 							   //cuando editamos la review, se va a actualizar
-							   console.log(props, 'holaaaa')
+							   //console.log(props, 'holaaaa')
  	if (props.location.state && props.location.state.currentReview) {
  		editing = true;
  		initialReviewState = props.location.state.currentReview.review

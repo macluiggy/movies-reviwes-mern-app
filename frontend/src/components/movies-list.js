@@ -56,7 +56,7 @@ const MovieList = props => {
 		setCurrentSearchMode('')
 		MovieDataService.getAll(currentPage)
 			.then(response => {
-				console.log(response)
+				//console.log(response)
 				setMovies(response.data.movies);
 				setCurrentPage(response.data.page);
 				setEntriesPerPage(response.data.entries_per_page)
@@ -69,7 +69,7 @@ const MovieList = props => {
 	const retrieveRatings = () => {
 		MovieDataService.getRatings()
 			.then(response => {
-				console.log(response.data)
+				//console.log(response.data)
 				setRatings(["All Ratings"].concat(response.data))
 			})
 			.catch(e => {
@@ -90,7 +90,7 @@ const MovieList = props => {
 	const find = (query, by) => {
 		MovieDataService.find(query, by, currentPage)
 			.then(response => {
-				console.log(response.data)
+				//console.log(response.data)
 				setMovies(response.data.movies)
 			})
 			.catch(e => {
