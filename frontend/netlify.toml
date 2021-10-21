@@ -2,7 +2,7 @@
   NODE_VERSION = "14"
   NPM_FLAGS = "--prefix=/dev/null"
 [build]
-  publish = "frontend/build"
+  publish = "/frontend/build"
   command = "CI=false && npx pnpm i --store=node_modules/.pnpm-store && npx pnpm run build"
 
 
