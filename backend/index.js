@@ -15,7 +15,7 @@ async function main() {
 	const port = process.env.PORT || 8000
 
 	try {
-		//Intentando conectar al cluster de MongoDB
+		//Intentando conectar al cluster de MongoDB.
 		await client.connect()
 		//justo despues de conectar la base de datos llamamos a injectDB para obtener nuestra
 		//referancia inicial a la movies collection
