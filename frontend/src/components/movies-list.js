@@ -41,7 +41,7 @@ const MovieList = props => {
 	useEffect(() => {
 		setCurrentPage(0)
 	}, [currentSearchMode])
-	console.log('se buggeoooooooooooooooooooo sexooooooooooooooo')
+	console.log('rendered')
 	const retrieveNextPage = () => {
 		if (currentSearchMode === 'findByTitle') {
 			findByTitle()
