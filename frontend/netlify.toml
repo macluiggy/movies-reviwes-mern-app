@@ -1,0 +1,2 @@
+[build]
+  command = "CI=false && npx pnpm i --store=frontend/node_modules/.pnpm-store && npx pnpm run build"
