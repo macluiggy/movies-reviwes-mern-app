@@ -8,4 +8,4 @@
 
   
 
-###command = "npx pnpm i --store=node_modules/.pnpm-store && npx pnpm run build"###
+###command = "npx pnpm i --store=frontend/node_modules/.pnpm-store && npx pnpm run build"###
